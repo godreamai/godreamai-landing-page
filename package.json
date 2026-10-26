@@ -1,0 +1,24 @@
+{
+  "name": "godreamai-landing-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "node -e \"require('fs').rmSync('.next-dev',{recursive:true,force:true})\"",
+    "dev": "next dev",
+    "prebuild": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\"",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^15.5.28",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^5.9.3"
+  }
+}
