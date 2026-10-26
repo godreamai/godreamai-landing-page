@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { TEAM } from '@/lib/content';
-import { SectionEyebrow } from '@/components/ui/primitives';
 
 /** "Quiénes somos": se muestra solo cuando TEAM (src/lib/content.ts) tiene datos reales. */
 export function Team() {
@@ -8,8 +7,9 @@ export function Team() {
   return (
     <section className="section tone-white gd-light" id="equipo" aria-labelledby="equipo-title">
       <div className="container">
-        <SectionEyebrow label="Quiénes somos" />
-        <h2 id="equipo-title" className="h2 reveal">Las personas detrás de <mark>tu web.</mark></h2>
+        <div className="sec-head reveal">
+          <h2 id="equipo-title" className="h2">Las personas detrás de tu web.</h2>
+        </div>
         <ul className="team">
           {TEAM.map((m) => (
             <li className="reveal" key={m.name}>

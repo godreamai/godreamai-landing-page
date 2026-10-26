@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { FAQS } from '@/lib/content';
-import { SectionEyebrow } from '@/components/ui/primitives';
 
 export function Faq() {
   // Todas cerradas al cargar.
@@ -18,11 +17,10 @@ export function Faq() {
 
   return (
     <section className="section tone-dark" id="preguntas" aria-labelledby="preguntas-title">
-      <div className="container faq-grid">
-        <div>
-          <SectionEyebrow label="Preguntas frecuentes" />
-          <h2 id="preguntas-title" className="h2 reveal">Lo que suelen <span className="acc">preguntarnos.</span></h2>
-          <p className="sub reveal">¿Tenés otra duda? <a href="#contacto">Escribinos</a> y te respondemos.</p>
+      <div className="container">
+        <div className="sec-head reveal">
+          <h2 id="preguntas-title" className="h2">Lo que suelen preguntarnos.</h2>
+          <p className="sub">¿Tenés otra duda? <a href="#contacto">Escribinos</a> y te respondemos.</p>
         </div>
         <div className="faq">
           {FAQS.map((f, i) => {

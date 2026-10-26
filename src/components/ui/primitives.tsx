@@ -14,16 +14,6 @@ export function Arrow() {
   return <i className="arr" aria-hidden="true" />;
 }
 
-/** Subtítulo de sección (punto + nombre en mayúsculas), mismo estilo que el eyebrow del hero. */
-export function SectionEyebrow({ label }: { label: string }) {
-  return (
-    <p className="eyebrow reveal">
-      <span className="dot" aria-hidden="true" />
-      {label}
-    </p>
-  );
-}
-
 /**
  * Escala una demo renderizada a tamaño real (w×h) al ancho disponible.
  * El factor se calcula en CSS con unidades de contenedor (ver .scaler en site.css).

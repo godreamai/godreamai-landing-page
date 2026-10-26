@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { SOLUTIONS } from '@/lib/content';
-import { Arrow, SectionEyebrow } from '@/components/ui/primitives';
+import { Arrow } from '@/components/ui/primitives';
 import { useContact } from '@/components/ui/contact';
 import { DIAGRAMS } from './StructureDiagrams';
 
@@ -16,10 +16,9 @@ export function Solutions() {
   return (
     <section className="section tone-light gd-light" id="soluciones" aria-labelledby="soluciones-title">
       <div className="container">
-        <SectionEyebrow label="Soluciones" />
-        <div className="sol-head reveal">
-          <h2 id="soluciones-title" className="h2">¿Qué tipo de web necesita <mark>tu negocio?</mark></h2>
-          <p className="sub">Cada negocio necesita algo distinto. Estos son los cuatro tipos de web que hacemos y la estructura típica de cada uno.</p>
+        <div className="sec-head reveal">
+          <h2 id="soluciones-title" className="h2">¿Qué tipo de web necesita tu negocio?</h2>
+          <p className="sub">Cada negocio necesita algo distinto. Abrí cada opción y fijate en cuál te reconocés: qué resuelve, qué cambia y cómo se organiza.</p>
         </div>
 
         <div className="sol reveal">
@@ -32,18 +31,19 @@ export function Solutions() {
                   <h3 style={{ font: 'inherit', letterSpacing: 'normal' }}>
                     <button className="sol-trigger" type="button" aria-expanded={on} aria-controls={`sol-body-${i}`} id={`sol-btn-${i}`} onClick={() => toggle(i)}>
                       <span className="mono">{String(i + 1).padStart(2, '0')}</span>
-                      <span className="t">{s.title}</span>
+                      <span className="t">{s.title}<span className="sol-tag">{s.tag}</span></span>
                       <span className="ic" aria-hidden="true" />
                     </button>
                   </h3>
                   <div className="sol-body" id={`sol-body-${i}`} role="region" aria-labelledby={`sol-btn-${i}`} inert={!on}>
                     <div>
                       <div className="sol-body-inner">
-                        <p>{s.what}</p>
-                        <dl className="sol-meta">
-                          <div><dt>A quién le sirve</dt><dd>{s.who}</dd></div>
-                          <div><dt>Beneficio principal</dt><dd>{s.benefit}</dd></div>
-                        </dl>
+                        <p className="sol-pitch">{s.pitch}</p>
+                        <p className="sol-ideal"><strong>Ideal para:</strong> {s.ideal}</p>
+                        <div className="sol-ba">
+                          <p className="sol-ba-before"><span>Hoy</span>{s.before}</p>
+                          <p className="sol-ba-after"><span>Con tu web</span>{s.after}</p>
+                        </div>
                         <div className="sol-mini" aria-hidden="true"><Diagram /></div>
                         <a className="sol-link" href="#contacto" onClick={(e) => { e.preventDefault(); pickAndGo(s.key); }}>
                           Consultar por esta web <Arrow />
@@ -64,7 +64,7 @@ export function Solutions() {
             ) : (
               <div className="sol-empty">
                 <p className="sol-empty-t">Elegí un tipo de web</p>
-                <p>Te mostramos qué incluye, a quién le sirve y cómo se organiza.</p>
+                <p>Te mostramos para quién es, qué cambia en tu día a día y cómo se organiza la página.</p>
               </div>
             )}
           </div>

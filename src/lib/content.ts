@@ -25,71 +25,93 @@ export const PROBLEMS = [
   {
     title: 'Te encuentran en Instagram, pero falta información.',
     text: 'Ven tus publicaciones, pero no encuentran precios, servicios, horarios o cómo trabajás. Terminan preguntando lo mismo una y otra vez, o no preguntan.',
-    fix: 'toda la información importante, ordenada en un solo lugar.',
+    fix: 'toda la información importante queda ordenada en un solo lugar.',
   },
   {
     title: 'Te buscan y no encuentran una presentación profesional.',
     text: 'Alguien te recomienda, te buscan en Google y no aparece nada que muestre la calidad de lo que hacés.',
-    fix: 'una presentación que transmite confianza desde el primer vistazo.',
+    fix: 'te encuentran con una presentación que transmite confianza.',
   },
   {
     title: 'Quieren consultar o comprar, pero no saben cómo.',
     text: 'Les interesa lo que ofrecés, pero el siguiente paso no está claro. Y cuando cuesta consultar, muchos lo dejan para después.',
-    fix: 'un camino claro para escribirte o comprar.',
+    fix: 'tienen un camino claro para escribirte o comprarte.',
   },
 ];
 
-export const SOLUTIONS: { key: WebType; title: string; what: string; who: string; benefit: string }[] = [
+/**
+ * Soluciones. `pitch` dice qué es en una frase; `ideal` para quién es;
+ * `before`/`after` muestran el cambio concreto en el día a día.
+ */
+export type Solution = {
+  key: WebType;
+  title: string;
+  tag: string;
+  pitch: string;
+  ideal: string;
+  before: string;
+  after: string;
+};
+export const SOLUTIONS: Solution[] = [
   {
     key: 'landing',
     title: 'Landing pages',
-    what: 'Una sola página enfocada en un servicio o propuesta, pensada para que el visitante entienda rápido y te consulte.',
-    who: 'Profesionales, emprendimientos y negocios que quieren promocionar un servicio puntual o recibir consultas desde Instagram o anuncios.',
-    benefit: 'Un mensaje claro y un solo objetivo: que te escriban.',
+    tag: 'Para que te consulten',
+    pitch: 'Una sola página con un solo objetivo: que entiendan qué ofrecés y te escriban.',
+    ideal: 'Profesionales y emprendimientos con un servicio principal.',
+    before: 'Te escriben "¿precio?" y la charla arranca de cero.',
+    after: 'Llegan sabiendo qué hacés y listos para avanzar.',
   },
   {
     key: 'empresarial',
     title: 'Webs empresariales',
-    what: 'Un sitio con varias páginas para presentar tu empresa, tus servicios y tu forma de trabajar.',
-    who: 'Empresas y negocios con varios servicios, equipo o trayectoria para mostrar.',
-    benefit: 'Una presentación completa y ordenada que transmite confianza.',
+    tag: 'Para dar confianza',
+    pitch: 'Un sitio de varias páginas que presenta tu empresa, tus servicios y tu trayectoria.',
+    ideal: 'Empresas con varios servicios o clientes que te investigan antes de contratarte.',
+    before: 'Te buscan y solo aparece un perfil de redes.',
+    after: 'Encuentran una presentación completa y profesional.',
   },
   {
     key: 'tienda',
     title: 'Tiendas online',
-    what: 'Un catálogo con carrito para que tus clientes elijan productos y compren online.',
-    who: 'Comercios y marcas que venden productos y quieren ordenar sus ventas más allá de los mensajes.',
-    benefit: 'Tus clientes ven productos y opciones y pueden comprar cuando quieran.',
+    tag: 'Para vender',
+    pitch: 'Tu catálogo con carrito, para que te compren sin esperar a que respondas un mensaje.',
+    ideal: 'Comercios y marcas que venden productos.',
+    before: 'Cada venta es una conversación larga por mensaje.',
+    after: 'Eligen, compran y vos preparás el pedido.',
   },
   {
     key: 'medida',
     title: 'Desarrollo a medida',
-    what: 'Cuando tu negocio necesita algo específico que una plantilla no resuelve: reservas, turnos u otras funciones propias.',
-    who: 'Negocios con procesos particulares, como consultorios, estudios o servicios con agenda.',
-    benefit: 'Una web que se adapta a cómo funciona tu negocio, y no al revés.',
+    tag: 'Para tu forma de trabajar',
+    pitch: 'Funciones propias de tu negocio que una plantilla no resuelve, como turnos o reservas.',
+    ideal: 'Consultorios, estudios y servicios con agenda o procesos propios.',
+    before: 'Turnos coordinados a mano y por mensaje.',
+    after: 'Tus clientes reservan solos y vos ves todo ordenado.',
   },
 ];
 
+/** Proceso: `text` es lo que hacemos nosotros; `you` es tu parte, en pocas palabras. */
 export const STEPS = [
   {
     title: 'Nos contás tu idea',
-    you: 'Nos contás qué hace tu negocio, a quién le vendés y qué te gustaría lograr con la página.',
-    we: 'Escuchamos, hacemos preguntas y te recomendamos qué tipo de web te conviene.',
+    text: 'Charlamos sobre tu negocio y lo que querés lograr. Te recomendamos qué tipo de web te conviene.',
+    you: 'Contarnos cómo trabajás.',
   },
   {
     title: 'Definimos la estructura',
-    you: 'Validás las secciones y nos compartís el material que tengas: logo, fotos o textos.',
-    we: 'Armamos el mapa de la página: qué secciones lleva, en qué orden y qué tiene que decir cada una.',
+    text: 'Armamos el mapa de la página: qué secciones lleva y qué dice cada una.',
+    you: 'Aprobarla y pasarnos logo, fotos o textos.',
   },
   {
     title: 'Diseñamos y desarrollamos',
-    you: 'Ves el avance y nos das tu opinión.',
-    we: 'Diseñamos la página con la identidad de tu marca y la desarrollamos para que funcione en celular, tablet y computadora.',
+    text: 'Creamos la página con la identidad de tu marca, lista para celular y computadora.',
+    you: 'Ver el avance y opinar.',
   },
   {
     title: 'Revisamos y publicamos',
-    you: 'Revisás todo y nos contás qué ajustarías.',
-    we: 'Hacemos los ajustes acordados, los controles finales y publicamos tu web.',
+    text: 'Hacemos los ajustes, los controles finales y la ponemos online.',
+    you: 'Revisar y pedir cambios.',
   },
 ];
 

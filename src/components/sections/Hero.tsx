@@ -45,7 +45,7 @@ export function Hero() {
   const fade = `fade-swap${fading ? ' out' : ''}`;
 
   return (
-    <section className="hero" id="inicio" aria-labelledby="hero-title">
+    <section className="hero bg-glow" id="inicio" aria-labelledby="hero-title">
       <div className="container hero-grid">
         <div className="hero-copy">
           <h1 id="hero-title" className="display">Tu negocio merece una web que esté <span className="acc">a la altura.</span></h1>

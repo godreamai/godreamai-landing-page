@@ -6,7 +6,7 @@ import shotDesktop from '@/assets/projects/godreamai-desktop.png';
 import shotMobile from '@/assets/projects/godreamai-mobile.png';
 import type { WebType } from '@/lib/whatsapp';
 import { DEMOS, DEMO_ORDER } from '@/components/demos/demos';
-import { Arrow, BrowserFrame, PhoneFrame, Scaled, SectionEyebrow } from '@/components/ui/primitives';
+import { Arrow, BrowserFrame, PhoneFrame, Scaled } from '@/components/ui/primitives';
 import { ScrollScaled } from '@/components/ui/ScrollScaled';
 import { useContact } from '@/components/ui/contact';
 
@@ -48,11 +48,10 @@ export function Examples() {
   const demo = openKey ? DEMOS[openKey] : null;
 
   return (
-    <section className="section tone-dark" id="ejemplos" aria-labelledby="ejemplos-title">
+    <section className="section tone-dark bg-glow" id="ejemplos" aria-labelledby="ejemplos-title">
       <div className="container">
-        <SectionEyebrow label="Ejemplos" />
-        <div className="ex-head reveal">
-          <h2 id="ejemplos-title" className="h2">Así se puede ver la web de <span className="acc">tu negocio.</span></h2>
+        <div className="sec-head reveal">
+          <h2 id="ejemplos-title" className="h2">Así se puede ver la web de tu negocio.</h2>
           <p className="sub">Un proyecto real y tres demos conceptuales con marcas ficticias, cada una con su propia identidad. Las demos no son proyectos de clientes: muestran lo que podemos diseñar.</p>
         </div>
 
