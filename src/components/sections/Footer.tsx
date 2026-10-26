@@ -18,7 +18,9 @@ export function Footer() {
     <footer className="footer">
       <div className="container footer-grid">
         <div className="footer-brand">
-          <Logo height={32} />
+          <a href="https://www.godreamai.com/" aria-label="Go Dream AI: ir al sitio principal" className="footer-logo">
+            <Logo height={32} />
+          </a>
           <p>Diseñamos y desarrollamos páginas web para que tu negocio se vea profesional y tus clientes te contacten fácil.</p>
         </div>
         <nav className="footer-col" aria-label="Pie de página">

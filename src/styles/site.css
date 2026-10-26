@@ -474,15 +474,16 @@ mark{background:linear-gradient(transparent 12%,var(--brand-lime) 12%,var(--bran
 .cta-note{font-size:var(--t-cap);color:#2a3300;margin-top:-8px}
 .cta-note a{color:var(--brand-black);font-weight:600;text-underline-offset:3px}
 /* Marca de agua: logo oficial negro, solo con opacidad, recortado en la esquina */
-.cta-mark{position:absolute;z-index:0;right:-4%;bottom:-38%;width:clamp(320px,38vw,560px);height:auto;opacity:.07;pointer-events:none;user-select:none}
-@media (max-width:959px){.cta-mark{bottom:-18%;right:-20%}}
+.cta-mark{position:absolute;z-index:0;right:2%;bottom:-70px;width:clamp(260px,32vw,460px);height:auto;opacity:.12;pointer-events:none;user-select:none}
+@media (max-width:959px){.cta-mark{right:-8%;bottom:-40px;width:clamp(240px,60vw,340px)}}
 
 /* ---------- Footer (mismo armado que godreamai.com) ---------- */
 .footer{background:var(--bg);border-top:1px solid rgba(245,245,245,.08)}
 .footer-grid{display:grid;grid-template-columns:1fr;gap:32px;padding-top:56px;padding-bottom:40px}
 @media (min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr}}
 .footer-brand{display:flex;flex-direction:column;gap:12px}
-.footer-brand img{height:32px;width:auto;align-self:flex-start}
+.footer-logo{align-self:flex-start;display:inline-flex}
+.footer-brand img{height:32px;width:auto}
 .footer-brand p{font-size:14px;color:var(--text-3);max-width:340px}
 .footer-col{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
 .footer-eyebrow{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
@@ -499,7 +500,7 @@ mark{background:linear-gradient(transparent 12%,var(--brand-lime) 12%,var(--bran
 @media (max-width:767px){
   .footer-grid,.footer-bottom-inner{text-align:center;justify-content:center}
   .footer-brand,.footer-col{align-items:center}
-  .footer-brand img{align-self:center}
+  .footer-logo{align-self:center}
 }
 
 /* ---------- 404 ---------- */
@@ -524,4 +525,24 @@ mark{background:linear-gradient(transparent 12%,var(--brand-lime) 12%,var(--bran
 @media (max-width:599px){
   .sol-body-inner{padding-left:0}
   .wf-row .bar{display:none}
+
+  /* Contenido centrado solo en mobile (en desktop se mantiene alineado a la izquierda) */
+  .hero-copy{text-align:center}
+  .hero .display,.hero .lead{margin-inline:auto}
+  .cta-row{justify-content:center}
+  .seg{margin-inline:auto}
+  .seg-desc{text-align:center}
+
+  .problem{align-items:center;text-align:center}
+  .problem .fix{flex-direction:column;align-items:center;text-align:center}
+  .problem .fix{display:flex;gap:8px}
+
+  .faq-item button{padding:22px 44px;text-align:center}
+  .faq-a p{padding:0 8px 24px;text-align:center}
+
+  .sol-trigger .mono{width:36px}
+  .sol-trigger .t{text-align:center}
+  .sol-body-inner{text-align:center}
+  .sol-ba p{text-align:center}
+  .sol-link{margin-inline:auto}
 }
