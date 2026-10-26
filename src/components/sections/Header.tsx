@@ -41,7 +41,18 @@ export function Header() {
   return (
     <header className="header" id="top">
       <div className="container header-inner">
-        <a className="lockup" href="#top" aria-label="Go Dream AI — inicio">
+        <a
+          className="lockup"
+          href="#top"
+          aria-label="Go Dream AI — inicio"
+          onClick={(e) => {
+            // Salto directo al principio, sin la animación de scroll suave.
+            e.preventDefault();
+            setOpen(false);
+            window.scrollTo({ top: 0, behavior: 'instant' });
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+          }}
+        >
           <Logo priority />
           <span className="lockup-desc" aria-hidden="true">diseño + desarrollo<br />web para negocios</span>
         </a>
