@@ -189,7 +189,7 @@ mark{background:linear-gradient(transparent 12%,var(--brand-lime) 12%,var(--bran
 @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
 
 /* ---------- Hero ---------- */
-.hero{padding:clamp(40px,6vw,88px) 0 clamp(64px,8vw,112px);overflow:hidden}
+.hero{padding:clamp(64px,7vw,96px) 0 clamp(64px,8vw,112px);overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:1fr;gap:clamp(40px,5vw,64px);align-items:center}
 .hero .display{max-width:11em}
 .hero .lead{margin-top:24px}
@@ -223,8 +223,8 @@ mark{background:linear-gradient(transparent 12%,var(--brand-lime) 12%,var(--bran
 }
 
 /* Escalado de demos */
-.scaler{position:relative;width:100%;overflow:hidden;background:#fff;container-type:inline-size}
-.scaler>.demo{position:absolute;top:0;left:0;transform-origin:0 0;transform:scale(var(--s,.4));transform:scale(tan(atan2(100cqw,var(--w))));pointer-events:none}
+.scaler{position:relative;width:100%;overflow:hidden;background:#fff}
+.scaler>.demo{position:absolute;top:0;left:0;transform-origin:0 0;transform:scale(var(--s,.4));pointer-events:none}
 .fade-swap{transition:opacity 260ms var(--ease),transform 260ms var(--ease)}
 .fade-swap.out{opacity:0;transform:translateY(8px)}
 

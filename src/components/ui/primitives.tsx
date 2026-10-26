@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import type { CSSProperties, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import logoWhite from '@/assets/logo-gdai-white.png';
 import logoBlack from '@/assets/logo-gdai-black.png';
 
@@ -14,18 +14,7 @@ export function Arrow() {
   return <i className="arr" aria-hidden="true" />;
 }
 
-/**
- * Escala una demo renderizada a tamaño real (w×h) al ancho disponible.
- * El factor se calcula en CSS con unidades de contenedor (ver .scaler en site.css).
- */
-export function Scaled({ w, h, children }: { w: number; h: number; children: ReactNode }) {
-  const style = { aspectRatio: `${w} / ${h}`, '--w': `${w}px` } as CSSProperties;
-  return (
-    <div className="scaler" style={style} aria-hidden="true">
-      {children}
-    </div>
-  );
-}
+export { Scaled } from './Scaled';
 
 /**
  * Marco de navegador. `demo` agrega el rótulo "Demo conceptual" en la barra, sin tapar la página;
