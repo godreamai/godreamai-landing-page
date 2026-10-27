@@ -233,7 +233,6 @@ mark{background:linear-gradient(transparent 12%,var(--brand-lime) 12%,var(--bran
 .seg button{min-height:40px;padding:0 18px;border-radius:var(--r-pill);font-size:14px;font-weight:500;color:var(--text-2);white-space:nowrap;transition:background var(--d-fast) var(--ease),color var(--d-fast) var(--ease)}
 .seg button:hover{color:var(--text)}
 .seg button[aria-selected="true"]{background:var(--brand-white);color:var(--brand-black)}
-.seg-desc{margin-top:14px;font-size:var(--t-small);color:var(--text-2);min-height:1.6em}
 @media (max-width:479px){
   .seg{width:100%}
   .seg button{flex:1;padding:0 8px;font-size:13px}
@@ -409,32 +408,30 @@ mark{background:linear-gradient(transparent 12%,var(--brand-lime) 12%,var(--bran
 .tl-step:hover .tl-n{background:var(--brand-lime);color:var(--brand-black);box-shadow:0 0 0 8px rgba(204,255,0,.12)}
 .tl-body h3{padding-top:16px;font-size:var(--t-h3)}
 .tl-body>p{margin-top:12px;font-size:var(--t-small);line-height:1.55;color:var(--text-2);max-width:24em}
-.tl-body .tl-you{display:inline-block;margin-top:20px;padding:8px 14px;border-radius:var(--r-pill);background:rgba(204,255,0,.1);border:1px solid rgba(204,255,0,.25);font-size:14px;color:var(--text)}
-.tl-you strong{color:var(--brand-lime);font-weight:600}
 @media (min-width:1024px){
-  .tl{--tl-gap:clamp(24px,3vw,40px);grid-template-columns:repeat(4,1fr);gap:var(--tl-gap)}
-  .tl-step{grid-template-columns:1fr;justify-items:center;text-align:center;gap:0;padding-bottom:0}
+  .tl{--tl-gap:clamp(24px,3vw,40px);grid-template-columns:repeat(4,1fr);column-gap:var(--tl-gap);row-gap:0}
+  /* Subgrid: número, título y texto comparten filas entre pasos, así quedan a la misma altura */
+  .tl-step{grid-row:span 3;grid-template-rows:subgrid;grid-template-columns:1fr;justify-items:center;align-items:start;text-align:center;gap:0;padding-bottom:0}
+  .tl-body{display:contents}
   /* Une el borde del círculo con el del siguiente (centro + radio + 8px de aire) */
   .tl-step:not(:last-child)::after{left:calc(50% + 40px);width:calc(100% + var(--tl-gap) - 80px);top:31.5px;bottom:auto;height:1px;background:linear-gradient(90deg,var(--brand-lime),var(--n-700))}
   .tl-body h3{padding-top:28px}
   .tl-body>p{margin-inline:auto}
 }
 
-/* Nuestro enfoque: principios centrados con número en círculo */
-.principles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:clamp(32px,4vw,48px) clamp(24px,3vw,40px);text-align:center}
-@media (min-width:600px){.principles{grid-template-columns:repeat(2,1fr)}}
-.principles li{position:relative;display:flex;flex-direction:column;align-items:center}
-/* En desktop, una línea punteada con una flecha une cada número con el siguiente */
-@media (min-width:1024px){
-  .principles{--p-gap:clamp(24px,3vw,40px);grid-template-columns:repeat(4,1fr);column-gap:var(--p-gap)}
-  .principles li:not(:last-child)::before{content:"";position:absolute;top:27.5px;left:calc(50% + 40px);width:calc(100% + var(--p-gap) - 80px);border-top:1px dashed var(--n-400)}
-  .principles li:not(:last-child)::after{content:"";position:absolute;top:22px;left:calc(150% + var(--p-gap) - 52px);width:12px;height:12px;background:var(--n-500);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 4l8 8-8 8'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 4l8 8-8 8'/%3E%3C/svg%3E") center/contain no-repeat}
-}
-.principle-n{width:56px;height:56px;margin-bottom:20px;border-radius:50%;border:1px solid var(--brand-lime);display:grid;place-items:center;font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--brand-lime);transition:background var(--d-base) var(--ease),color var(--d-base) var(--ease),border-color var(--d-base) var(--ease)}
-.principles li:hover .principle-n{background:var(--brand-lime);border-color:var(--brand-lime);color:var(--brand-black)}
-.gd-light .principle-n{border-color:var(--brand-black);color:var(--brand-black)}
-.principles h3{margin:0;font-family:var(--font-display);font-size:var(--t-h3);font-weight:600;letter-spacing:-0.02em;line-height:1.2}
-.principles p{margin-top:8px;color:var(--text-2);font-size:var(--t-small);max-width:22em}
+/* Nuestro enfoque: propuesta de valor en tarjetas con ilustración (sin números, para no repetir "Proceso") */
+.ap-defs{position:absolute;width:0;height:0;overflow:hidden}
+.values{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:clamp(16px,2vw,20px)}
+@media (min-width:640px){.values{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1080px){.values{grid-template-columns:repeat(4,1fr)}}
+.value-card{display:flex;flex-direction:column;padding:clamp(24px,2.6vw,36px);background:rgba(255,255,255,.55);border:1px solid #E6E6E6;border-radius:20px;box-shadow:0 1px 2px rgba(10,10,10,.03),0 20px 40px -28px rgba(10,10,10,.12);transition:transform var(--d-base) var(--ease),box-shadow var(--d-base) var(--ease)}
+.value-card:hover{transform:translateY(-4px);box-shadow:0 1px 2px rgba(10,10,10,.04),0 28px 50px -26px rgba(10,10,10,.18)}
+.value-art{width:100%;max-width:320px;margin:0 auto 28px}
+.value-art svg{display:block;width:100%;height:auto;overflow:visible}
+.value-card h3{margin:0;font-family:var(--font-display);font-size:clamp(22px,1.9vw,26px);font-weight:600;letter-spacing:-0.025em;line-height:1.15;max-width:11em}
+.value-card p{margin:16px 0 28px;color:var(--text-2);font-size:var(--t-small);line-height:1.6}
+/* Acento lima al pie de cada tarjeta */
+.value-card::after{content:"";display:block;width:54px;height:4px;margin-top:auto;border-radius:2px;background:var(--brand-lime)}
 
 /* ---------- Equipo (solo con datos reales) ---------- */
 .team{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:clamp(20px,3vw,32px)}
@@ -531,7 +528,6 @@ mark{background:linear-gradient(transparent 12%,var(--brand-lime) 12%,var(--bran
   .hero .display,.hero .lead{margin-inline:auto}
   .cta-row{justify-content:center}
   .seg{margin-inline:auto}
-  .seg-desc{text-align:center}
 
   .problem{align-items:center;text-align:center}
   .problem .fix{flex-direction:column;align-items:center;text-align:center}

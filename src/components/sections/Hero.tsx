@@ -84,7 +84,6 @@ export function Hero() {
               </button>
             ))}
           </div>
-          <p className="seg-desc" aria-live="polite">{HERO_TABS[selected].desc}</p>
         </div>
       </div>
     </section>

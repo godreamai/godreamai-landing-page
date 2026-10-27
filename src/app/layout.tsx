@@ -48,7 +48,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* Activa el reveal solo si hay JS: sin JS, todo el contenido queda visible. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {children}
         <Analytics />
       </body>

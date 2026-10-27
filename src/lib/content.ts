@@ -14,11 +14,11 @@ export const NAV = [
  */
 export const HERO_NOTE = '';
 
-export const HERO_TABS: { key: WebType; label: string; desc: string }[] = [
-  { key: 'landing', label: 'Landing', desc: 'Landing page: una página enfocada en un servicio y en que te escriban.' },
-  { key: 'empresarial', label: 'Empresarial', desc: 'Web empresarial: varias páginas para presentar tu empresa y tus servicios.' },
-  { key: 'tienda', label: 'Tienda', desc: 'Tienda online: catálogo y carrito para vender tus productos.' },
-  { key: 'medida', label: 'A medida', desc: 'A medida: funciones propias de tu negocio, como un sistema de turnos.' },
+export const HERO_TABS: { key: WebType; label: string }[] = [
+  { key: 'landing', label: 'Landing' },
+  { key: 'empresarial', label: 'Empresarial' },
+  { key: 'tienda', label: 'Tienda' },
+  { key: 'medida', label: 'A medida' },
 ];
 
 export const PROBLEMS = [
@@ -68,7 +68,7 @@ export const SOLUTIONS: Solution[] = [
     tag: 'Para dar confianza',
     pitch: 'Un sitio de varias páginas que presenta tu empresa, tus servicios y tu trayectoria.',
     ideal: 'Empresas con varios servicios o clientes que te investigan antes de contratarte.',
-    before: 'Te buscan y solo aparece un perfil de redes.',
+    before: 'Explicás por mensaje quiénes son y qué hacen, una y otra vez.',
     after: 'Encuentran una presentación completa y profesional.',
   },
   {
@@ -91,38 +91,33 @@ export const SOLUTIONS: Solution[] = [
   },
 ];
 
-/** Proceso: `text` es lo que hacemos nosotros; `you` es tu parte, en pocas palabras. */
+/** Proceso: cada `text` dice qué hacemos nosotros y, de paso, qué aporta el cliente. */
 export const STEPS = [
   {
     title: 'Nos contás tu idea',
-    text: 'Charlamos sobre tu negocio y lo que querés lograr. Te recomendamos qué tipo de web te conviene.',
-    you: 'Contarnos cómo trabajás.',
+    text: 'Charlamos sobre tu negocio y lo que querés lograr, y te recomendamos qué tipo de web te conviene.',
   },
   {
     title: 'Definimos la estructura',
-    text: 'Armamos el mapa de la página: qué secciones lleva y qué dice cada una.',
-    you: 'Aprobarla y pasarnos logo, fotos o textos.',
+    text: 'Armamos el mapa de la página. Vos lo aprobás y nos pasás tu logo, fotos o textos si los tenés.',
   },
   {
     title: 'Diseñamos y desarrollamos',
-    text: 'Creamos la página con la identidad de tu marca, lista para celular y computadora.',
-    you: 'Ver el avance y opinar.',
+    text: 'Creamos la página y vas viendo el avance para opinar en el camino.',
   },
   {
     title: 'Revisamos y publicamos',
-    text: 'Hacemos los ajustes, los controles finales y la ponemos online.',
-    you: 'Revisar y pedir cambios.',
+    text: 'Ajustamos lo que nos pidas, hacemos los controles finales y la ponemos online.',
   },
 ];
 
 export const PRINCIPLES = [
-  { title: 'Entender el negocio antes de diseñar.', text: 'Qué vendés, a quién y cómo te consultan hoy. De ahí sale todo lo demás.' },
-  { title: 'Estructura según el objetivo.', text: 'Una web para recibir consultas no se arma igual que una para vender online.' },
-  { title: 'Identidad visual cuidada.', text: 'Colores, tipografías e imágenes coherentes con tu marca, para que se vea como vos.' },
-  { title: 'Pensada para cada pantalla.', text: 'Se ve y se usa bien en celular, tablet y computadora.' },
+  { title: 'Entendemos tu negocio.', text: 'Analizamos qué vendés, a quién y qué querés lograr, para proponer soluciones que tengan sentido y no una plantilla genérica.' },
+  { title: 'Pensada para tus clientes.', text: 'Pensamos cada sección desde el lado de quien te visita: qué necesita saber, qué dudas tiene y qué lo convence de elegirte.' },
+  { title: 'Identidad visual cuidada.', text: 'Diseñamos con la identidad de tu marca, con colores, tipografías e imágenes coherentes para que tu web se vea profesional y única.' },
+  { title: 'Pensada para cada pantalla.', text: 'Tu web se ve bien y funciona perfecto en celular, tablet y computadora, para que tus clientes tengan siempre la mejor experiencia.' },
 ];
 
-/* Lo no confirmado (dominio, mantenimiento, plazos, precios) se responde invitando a consultar. */
 /**
  * Equipo (sección "Quiénes somos"). Vacío = la sección no se muestra.
  * Fotos: guardarlas en src/assets/team/ e importarlas acá.
@@ -130,30 +125,23 @@ export const PRINCIPLES = [
 export type TeamMember = { name: string; role: string; bio?: string; photo?: StaticImageData };
 export const TEAM: TeamMember[] = [];
 
+/* Solo dudas que no responde otra sección (tipos de web, proceso, pantallas ya están en la página). Sin precios publicados. */
 export const FAQS = [
   {
-    q: '¿Qué tipo de página necesito?',
-    a: 'Depende de lo que quieras lograr. Si querés que te consulten por un servicio, suele alcanzar con una landing page. Si necesitás presentar varios servicios o tu empresa, una web empresarial. Si querés vender productos, una tienda online. Si no estás seguro, contanos qué hacés y lo vemos juntos.',
+    q: '¿Cuánto cuesta y cuánto tarda?',
+    a: 'Depende de lo que necesites: no es lo mismo una landing que una tienda online. Nos escribís contándonos qué querés, charlamos sobre tu negocio y te pasamos un presupuesto con el tiempo estimado.',
   },
   {
-    q: '¿Qué necesito para empezar?',
-    a: 'Solo contarnos qué hace tu negocio y qué te gustaría lograr con la página. Si ya tenés logo, fotos o textos, suman; si no, lo charlamos.',
+    q: '¿Puedo pedir cambios cuando la web ya está publicada?',
+    a: 'Sí. Podés sumar un mantenimiento mensual: nos ocupamos de que tu web funcione bien y hacemos los pequeños cambios que necesites.',
   },
   {
-    q: '¿La página funciona en celulares?',
-    a: 'Sí. Diseñamos cada página para que se vea y se use bien en celular, tablet y computadora.',
+    q: '¿Me van a encontrar en Google?',
+    a: 'Una web bien armada ayuda, y además hay un plan mensual que suma un blog con dos publicaciones por mes para mejorar tu posicionamiento. Los resultados dependen de tu rubro y de la competencia.',
   },
   {
     q: '¿Puedo usar mi propio dominio?',
     a: 'Escribinos y te contamos cómo lo manejamos según tu caso, tanto si ya tenés un dominio como si todavía no.',
-  },
-  {
-    q: '¿Cómo es el proceso de desarrollo?',
-    a: 'Primero nos contás tu idea, después definimos juntos la estructura, diseñamos y desarrollamos la página, y por último la revisamos con vos antes de publicarla. Los detalles de cada etapa los vemos al conversar.',
-  },
-  {
-    q: '¿Qué pasa cuando está terminada?',
-    a: 'Consultanos y te contamos qué opciones hay después de la publicación según el tipo de proyecto.',
   },
 ];
 

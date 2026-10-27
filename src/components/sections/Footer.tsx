@@ -21,7 +21,7 @@ export function Footer() {
           <a href="https://www.godreamai.com/" aria-label="Go Dream AI: ir al sitio principal" className="footer-logo">
             <Logo height={32} />
           </a>
-          <p>Diseñamos y desarrollamos páginas web para que tu negocio se vea profesional y tus clientes te contacten fácil.</p>
+          <p>Webs a medida para que tu negocio se vea profesional y tus clientes te contacten fácil.</p>
         </div>
         <nav className="footer-col" aria-label="Pie de página">
           <span className="footer-eyebrow">Empresa</span>
@@ -38,7 +38,6 @@ export function Footer() {
       <div className="footer-bottom">
         <div className="container footer-bottom-inner">
           <span>© {new Date().getFullYear()} Go Dream AI</span>
-          <span>Los ejemplos de esta página son demos conceptuales con marcas ficticias.</span>
         </div>
       </div>
     </footer>

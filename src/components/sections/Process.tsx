@@ -16,9 +16,7 @@ export function Process() {
               <span className="tl-n" aria-hidden="true">{i + 1}</span>
               <div className="tl-body">
                 <h3>{s.title}</h3>
-                <p>{s.text}</p>
-                <p className="tl-you"><strong>Tu parte:</strong> {s.you}</p>
-              </div>
+                <p>{s.text}</p>              </div>
             </li>
           ))}
         </ol>
