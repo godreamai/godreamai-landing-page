@@ -1,51 +1,88 @@
 'use client';
 
-import { useEffect, useRef, useState, type MouseEvent } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import shotDesktop from '@/assets/projects/godreamai-desktop.png';
-import shotMobile from '@/assets/projects/godreamai-mobile.png';
-import type { WebType } from '@/lib/whatsapp';
-import { DEMOS, DEMO_ORDER } from '@/components/demos/demos';
-import { Arrow, BrowserFrame, PhoneFrame, Scaled } from '@/components/ui/primitives';
-import { ScrollScaled } from '@/components/ui/ScrollScaled';
-import { useContact } from '@/components/ui/contact';
+import humanusDesktop from '@/assets/projects/humanus-desktop.png';
+import humanusMobile from '@/assets/projects/humanus-mobile.png';
+import lieverDesktop from '@/assets/projects/liever-desktop.png';
+import lieverMobile from '@/assets/projects/liever-mobile.png';
+import malanoDesktop from '@/assets/projects/virginiamalanoinmobiliaria-desktop.png';
+import malanoMobile from '@/assets/projects/virginiamalanoinmobiliaria-mobile.png';
+import hermolyDesktop from '@/assets/projects/hermoly-desktop.png';
+import hermolyMobile from '@/assets/projects/hermoly-mobile.png';
+import { Arrow, BrowserFrame, PhoneFrame } from '@/components/ui/primitives';
+
+const REAL_PROJECTS = [
+  {
+    host: 'humanus.godreamai.com',
+    name: 'Humanus',
+    cat: 'Proyecto real · Landing page',
+    desc: 'Kinesiología, pilates y alquiler de consultorios. Cada botón abre WhatsApp con el mensaje del servicio.',
+    desktop: humanusDesktop,
+    mobile: humanusMobile,
+  },
+  {
+    host: 'liever.godreamai.com',
+    name: 'Liever',
+    cat: 'Proyecto real · E-commerce',
+    desc: 'Mobiliario comercial y piezas a medida: catálogo, carrito, envíos al país y cotización por WhatsApp.',
+    desktop: lieverDesktop,
+    mobile: lieverMobile,
+  },
+  {
+    host: 'virginiamalanoinmobiliaria.godreamai.com',
+    name: 'Virginia Malano Inmobiliaria',
+    cat: 'Proyecto real · Landing page',
+    desc: 'Departamentos en venta y alquiler en edificios premium de Mar del Plata, con tasación por WhatsApp.',
+    desktop: malanoDesktop,
+    mobile: malanoMobile,
+  },
+  {
+    host: 'hermoly.godreamai.com',
+    name: 'Hermoly',
+    cat: 'Proyecto real · Sitio de producto',
+    desc: 'Gestión para peluquerías y centros de estética: clientas, stock y costo real de cada servicio.',
+    desktop: hermolyDesktop,
+    mobile: hermolyMobile,
+  },
+];
 
 export function Examples() {
-  const [openKey, setOpenKey] = useState<WebType | null>(null);
-  const dialog = useRef<HTMLDialogElement>(null);
-  const opener = useRef<HTMLButtonElement | null>(null);
-  const { pickAndGo } = useContact();
+  const track = useRef<HTMLDivElement>(null);
+  const [nav, setNav] = useState({ prev: false, next: true, active: 0, dots: REAL_PROJECTS.length });
+
+  // Distancia entre el inicio de una tarjeta y la siguiente (ancho + gap).
+  const stepOf = (t: HTMLDivElement) => {
+    const [a, b] = Array.from(t.children) as HTMLElement[];
+    return b ? b.offsetLeft - a.offsetLeft : a.offsetWidth;
+  };
+
+  const update = useCallback(() => {
+    const t = track.current;
+    if (!t) return;
+    const step = stepOf(t);
+    const max = t.scrollWidth - t.clientWidth;
+    const dots = Math.max(1, Math.round(max / step) + 1);
+    const prev = t.scrollLeft > 4;
+    const next = t.scrollLeft < max - 4;
+    const active = next ? Math.min(dots - 1, Math.round(t.scrollLeft / step)) : dots - 1;
+    setNav((s) => (s.prev === prev && s.next === next && s.active === active && s.dots === dots ? s : { prev, next, active, dots }));
+  }, []);
 
   useEffect(() => {
-    const d = dialog.current;
-    if (openKey && d && !d.open) {
-      d.showModal();
-      document.body.style.overflow = 'hidden';
-    }
-  }, [openKey]);
+    const t = track.current;
+    if (!t) return;
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(t);
+    return () => ro.disconnect();
+  }, [update]);
 
-  // Toda la tarjeta es clickeable; el foco queda solo en el botón "Ver ejemplo".
-  const openFromCard = (key: WebType) => (e: MouseEvent<HTMLElement>) => {
-    const btn = e.currentTarget.querySelector<HTMLButtonElement>('[data-open]');
-    opener.current = btn;
-    setOpenKey(key);
+  const go = (left: number) => track.current?.scrollTo({ left, behavior: 'smooth' });
+  const step = (dir: 1 | -1) => {
+    const t = track.current;
+    if (t) go(t.scrollLeft + dir * stepOf(t));
   };
-
-  // Escape, botón o clic afuera disparan el evento "close" del <dialog>.
-  const onClose = () => {
-    document.body.style.overflow = '';
-    setOpenKey(null);
-    opener.current?.focus();
-  };
-
-  const wantThis = () => {
-    const key = openKey;
-    opener.current = null;
-    dialog.current?.close();
-    if (key) pickAndGo(key);
-  };
-
-  const demo = openKey ? DEMOS[openKey] : null;
 
   return (
     <section className="section tone-dark bg-glow" id="ejemplos" aria-labelledby="ejemplos-title">
@@ -55,98 +92,64 @@ export function Examples() {
           <p className="sub">Un proyecto real y tres demos conceptuales con marcas ficticias, cada una con su propia identidad. Las demos no son proyectos de clientes: muestran lo que podemos diseñar.</p>
         </div>
 
-        <div className="ex-grid">
-          {/* Proyecto real: el sitio de Go Dream AI */}
-          <article
-            className="ex-card reveal"
-            onClick={(e) => {
-              if ((e.target as HTMLElement).closest('a')) return;
-              e.currentTarget.querySelector<HTMLAnchorElement>('[data-visit]')?.click();
-            }}
-          >
-            <div className="ex-preview">
-              <BrowserFrame url="godreamai.com" badge="Proyecto real">
-                <Image src={shotDesktop} alt="" className="shot" sizes="(min-width: 768px) 520px, 90vw" />
-              </BrowserFrame>
-              <PhoneFrame>
-                <Image src={shotMobile} alt="" className="shot" sizes="140px" />
-              </PhoneFrame>
-            </div>
-            <div className="ex-info">
-              <div>
-                <p className="ex-cat">Proyecto real · Landing page</p>
-                <h3>godreamai.com</h3>
-                <p>El sitio de Go Dream AI para su línea de automatizaciones e IA, diseñado y desarrollado por nosotros.</p>
-              </div>
-              <a className="ex-open" href="https://www.godreamai.com/" target="_blank" rel="noopener" data-visit>
-                Visitar sitio <span className="circ"><Arrow /></span>
-              </a>
-            </div>
-          </article>
-
-          {DEMO_ORDER.filter((key) => key !== 'landing').map((key) => {
-            const d = DEMOS[key];
-            return (
-              <article className="ex-card reveal" key={key} onClick={openFromCard(key)}>
+        <div className="ex-carousel reveal" role="group" aria-roledescription="carrusel" aria-label="Proyectos reales">
+          <div className="ex-stage">
+          <div className="ex-track" ref={track} onScroll={update} tabIndex={0}>
+            {REAL_PROJECTS.map((p) => (
+              <article
+                className="ex-card"
+                key={p.host}
+                onClick={(e) => {
+                  if ((e.target as HTMLElement).closest('a')) return;
+                  e.currentTarget.querySelector<HTMLAnchorElement>('[data-visit]')?.click();
+                }}
+              >
                 <div className="ex-preview">
-                  <BrowserFrame url={d.url} demo>
-                    <Scaled w={1280} h={800}><d.Desktop /></Scaled>
+                  <BrowserFrame url={p.host} badge="Proyecto real">
+                    <Image src={p.desktop} alt="" className="shot" sizes="(min-width: 768px) 520px, 90vw" />
                   </BrowserFrame>
                   <PhoneFrame>
-                    <Scaled w={390} h={800}><d.Mobile /></Scaled>
+                    <Image src={p.mobile} alt="" className="shot" sizes="140px" />
                   </PhoneFrame>
                 </div>
                 <div className="ex-info">
                   <div>
-                    <p className="ex-cat">{d.cat}</p>
-                    <h3>{d.name}</h3>
-                    <p>{d.desc}</p>
+                    <p className="ex-cat">{p.cat}</p>
+                    <h3>{p.name}</h3>
+                    <p>{p.desc}</p>
                   </div>
-                  <button className="ex-open" type="button" data-open aria-label={`Ver ejemplo: ${d.name}`}>
-                    Ver ejemplo <span className="circ"><Arrow /></span>
-                  </button>
+                  <a className="btn btn-secondary btn-sm ex-visit" href={`https://${p.host}/`} target="_blank" rel="noopener" data-visit>
+                    Visitar sitio <Arrow />
+                  </a>
                 </div>
               </article>
-            );
-          })}
-        </div>
-      </div>
+            ))}
+          </div>
 
-      <dialog
-        ref={dialog}
-        className="modal"
-        aria-labelledby="modal-title"
-        onClose={onClose}
-        onClick={(e) => { if (e.target === e.currentTarget) e.currentTarget.close(); }}
-      >
-        {demo && (
-          <div className="modal-inner">
-            <div className="modal-top">
-              <div>
-                <span className="badge-demo badge-static">Demo conceptual — no es un proyecto de cliente</span>
-                <h3 id="modal-title">{demo.name}</h3>
-                <p className="modal-cat">{demo.cat}</p>
-              </div>
-              <button className="modal-close" type="button" aria-label="Cerrar" onClick={() => dialog.current?.close()}>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
-              </button>
-            </div>
-            <div className="modal-view">
-              <BrowserFrame url={demo.url}>
-                <ScrollScaled w={1280} h={760} label={`Página completa de ${demo.name} (desktop)`}><demo.Desktop full /></ScrollScaled>
-              </BrowserFrame>
-              <PhoneFrame className="phone-modal">
-                <ScrollScaled w={390} h={800} label={`Página completa de ${demo.name} (celular)`}><demo.Mobile full /></ScrollScaled>
-              </PhoneFrame>
-            </div>
-            <p className="modal-hint">Scrolleá dentro de cada pantalla para recorrer la página completa.</p>
-            <div className="modal-foot">
-              <p>{demo.desc}</p>
-              <button className="btn btn-primary" type="button" onClick={wantThis}>Quiero una web así <Arrow /></button>
+          <button type="button" className="ex-arrow ex-prev" aria-label="Proyecto anterior" disabled={!nav.prev} onClick={() => step(-1)}>
+            <span className="flip"><Arrow /></span>
+          </button>
+          <button type="button" className="ex-arrow ex-next" aria-label="Proyecto siguiente" disabled={!nav.next} onClick={() => step(1)}>
+            <Arrow />
+          </button>
+          </div>
+
+          <div className="ex-controls">
+            <div className="ex-dots">
+              {Array.from({ length: nav.dots }, (_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  className="ex-dot"
+                  aria-label={`Ir al proyecto ${i + 1}`}
+                  aria-current={i === nav.active ? 'true' : undefined}
+                  onClick={() => track.current && go(i * stepOf(track.current))}
+                />
+              ))}
             </div>
           </div>
-        )}
-      </dialog>
+        </div>
+      </div>
     </section>
   );
 }

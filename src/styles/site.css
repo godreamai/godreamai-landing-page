@@ -352,12 +352,41 @@ mark{background:linear-gradient(transparent 12%,var(--brand-lime) 12%,var(--bran
 .wf-caption{margin-top:16px;font-size:var(--t-cap);color:var(--text-3)}
 
 /* ---------- Ejemplos ---------- */
-.ex-grid{display:grid;grid-template-columns:1fr;gap:clamp(20px,2.5vw,28px)}
-@media (min-width:768px){.ex-grid{grid-template-columns:repeat(2,1fr)}}
-.ex-card{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:var(--bg-raised);text-align:left;cursor:pointer;transition:border-color var(--d-base) var(--ease)}
+/* Carrusel: scroll horizontal con snap. En mobile la tarjeta siguiente asoma; en desktop se ven 2. */
+.ex-carousel{--ex-gap:clamp(16px,2.5vw,28px)}
+.ex-track{display:flex;gap:var(--ex-gap);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;margin:0 calc(var(--gutter)*-1);padding:4px var(--gutter);scroll-padding-inline:var(--gutter)}
+.ex-track::-webkit-scrollbar{display:none}
+.ex-track:focus-visible{outline:2px solid var(--brand-lime);outline-offset:-2px;border-radius:var(--r-lg)}
+@media (prefers-reduced-motion:reduce){.ex-track{scroll-behavior:auto}}
+@media (min-width:768px){
+  .ex-track{margin:0;padding:4px 0;scroll-padding-inline:0}
+  .ex-track .ex-card{flex-basis:calc((100% - var(--ex-gap))/2)}
+}
+.ex-controls{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:clamp(16px,2.5vw,24px)}
+.ex-dots{display:flex;align-items:center;gap:4px}
+.ex-dot{position:relative;width:24px;height:24px;padding:0;border:0;background:none;cursor:pointer}
+.ex-dot::after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:99px;background:var(--border-strong);transform:translate(-50%,-50%);transition:width var(--d-base) var(--ease),background var(--d-base) var(--ease)}
+.ex-dot[aria-current]::after{width:24px;background:var(--brand-lime)}
+.ex-stage{position:relative}
+.ex-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid var(--border-strong);background:var(--bg-raised);box-shadow:0 6px 20px rgba(0,0,0,.45);color:inherit;display:grid;place-items:center;cursor:pointer;transition:background var(--d-base) var(--ease),border-color var(--d-base) var(--ease),color var(--d-base) var(--ease),opacity var(--d-base) var(--ease)}
+@media (hover:hover){.ex-arrow:hover:not(:disabled){background:var(--brand-lime);border-color:var(--brand-lime);color:var(--brand-black)}}
+.ex-arrow:disabled{opacity:.35;cursor:default}
+.ex-arrow .flip{display:grid;transform:scaleX(-1)}
+/* Mobile y tablet: se desliza con el dedo (y con los puntos), sin flechas */
+.ex-arrow{display:none}
+/* Desktop: las flechas tienen su propio espacio a los costados, a la mitad de la altura de las tarjetas */
+@media (min-width:1024px){
+  .ex-stage{padding:0 72px}
+  .ex-arrow{display:grid;top:50%;width:48px;height:48px}
+  .ex-prev{left:0}
+  .ex-next{right:0}
+}
+.ex-card{flex:0 0 min(84%,420px);scroll-snap-align:start;display:flex;flex-direction:column;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:var(--bg-raised);text-align:left;cursor:pointer;transition:border-color var(--d-base) var(--ease)}
 .ex-card:hover{border-color:var(--border-strong)}
 .ex-preview{position:relative;padding:clamp(20px,3vw,32px) clamp(48px,7vw,72px) 0 clamp(20px,3vw,32px);overflow:hidden}
 .ex-preview .browser{border-radius:12px 12px 0 0;transition:transform var(--d-base) var(--ease);transform-origin:50% 100%}
+.ex-preview .shot{aspect-ratio:16/9;object-fit:cover;object-position:top}
+.ex-preview .phone .shot{aspect-ratio:auto;object-fit:fill}
 .ex-preview .browser-bar{height:24px;gap:8px;padding:0 8px 0 10px}
 .ex-preview .dots i{width:7px;height:7px}
 .ex-preview .url{height:16px;font-size:9px;max-width:180px}
@@ -365,16 +394,13 @@ mark{background:linear-gradient(transparent 12%,var(--brand-lime) 12%,var(--bran
 .ex-card:hover .ex-preview .browser{transform:scale(1.025)}
 .ex-preview .phone{right:clamp(12px,2vw,20px);bottom:-30%;width:26%;border-radius:16px;padding:4px}
 .ex-preview .phone .scaler,.ex-preview .phone .shot{border-radius:12px}
-.ex-info{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;padding:clamp(20px,2.5vw,28px);border-top:1px solid var(--border);position:relative;z-index:2;background:var(--bg-raised)}
-.ex-cat{font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em}
+.ex-info{display:grid;grid-template-columns:1fr;align-content:space-between;gap:18px;flex:1;padding:clamp(16px,2vw,22px);border-top:1px solid var(--border);position:relative;z-index:2;background:var(--bg-raised)}.ex-cat{font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em}
 .ex-info h3{font-size:var(--t-h3);margin-top:6px}
 .ex-info p:not(.ex-cat){color:var(--text-2);font-size:var(--t-small);margin-top:6px}
-.ex-open{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;white-space:nowrap;min-height:44px;text-decoration:none;color:inherit}
-.ex-open .circ{width:40px;height:40px;border-radius:50%;border:1px solid var(--border-strong);display:grid;place-items:center;transition:background var(--d-base) var(--ease),border-color var(--d-base) var(--ease),color var(--d-base) var(--ease)}
-.ex-card:hover .circ,.ex-open:focus-visible .circ{background:var(--brand-lime);border-color:var(--brand-lime);color:var(--brand-black)}
-@media (max-width:479px){
-  .ex-info{grid-template-columns:1fr}
-}
+.ex-visit{width:100%}
+.ex-visit svg{transition:transform var(--d-base) var(--ease)}
+.ex-card:hover .ex-visit svg,.ex-visit:focus-visible svg{transform:translateX(3px)}
+@media (hover:hover){.ex-card:hover .ex-visit{background:var(--brand-lime);border-color:var(--brand-lime);color:var(--brand-black)}}
 
 /* Modal */
 .modal{width:min(1160px,calc(100% - 24px));max-height:calc(100dvh - 24px);padding:0;border:1px solid var(--border);border-radius:var(--r-xl);background:var(--bg-raised);color:var(--text);overflow:auto}
